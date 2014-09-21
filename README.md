@@ -39,11 +39,12 @@ Install the [sshrc-git][] AUR package.
 
 Your most import configuration files (e.g. vim, inputrc) may not be bash scripts. Put them in ~/.sshrc.d and sshrc will copy them to a (guaranteed) unique folder in the server's /tmp directory after login. You can find them at $SSHHOME/.sshrc.d
 
-You can usually tell programs to load their configuration from the $SSHHOME/.sshrc.d directory by setting the right environment variables. For example, vim uses the MYVIMRC environment variable to specify an alternate config file location.
+You can usually tell programs to load their configuration from the $SSHHOME/.sshrc.d directory by setting the right environment variables. For example, vim can take a custom config file location with the `-u` flag:
 
     $ mkdir -p ~/.sshrc.d
     $ echo ':imap <special> jk <Esc>' > ~/.sshrc.d/vimrc
     $ echo 'export MYVIMRC=$SSHHOME/.sshrc.d/vimrc' > ~/.sshrc
+    $ echo 'alias vim="vim -u $MYVIMRC"' >> ~/.sshrc
     $ sshrc me@myserver
     $ vim # jk -> normal mode will work
 
